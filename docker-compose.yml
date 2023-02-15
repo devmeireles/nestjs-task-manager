@@ -1,0 +1,33 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: nestjstm
+    ports:
+      - "5432:5432"
+    volumes:
+      - "postgres:/var/lib/postgresql/data"
+    networks:
+      - postgres
+  pgadmin:
+    image: dpage/pgadmin4:5.2 #@TODO - must know why isn't possible to load servers.json on newest image version
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - "5050:80"
+    volumes:
+      - "pgadmin:/var/lib/pgadmin"
+      - "./servers.json:/pgadmin4/servers.json"
+    networks:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:
