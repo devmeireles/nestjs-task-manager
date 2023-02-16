@@ -13,6 +13,6 @@ export interface IDatabaseConfig {
 }
 
 export interface IJwtConfig {
-    experiresIn?: number;
+    expiresIn?: number;
     secret?: string;
 }

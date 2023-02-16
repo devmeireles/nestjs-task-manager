@@ -1,7 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as config from 'config';
-import { User } from 'src/auth/user.entity';
-import { Task } from 'src/tasks/task.entity';
+import { User } from '../auth/user.entity';
+import { Task } from '../tasks/task.entity';
 import { IDatabaseConfig } from './config.interface';
 
 const databaseConfig = config.get<IDatabaseConfig>('db');
