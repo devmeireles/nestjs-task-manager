@@ -12,6 +12,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { Logger } from '@nestjs/common/services';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
@@ -26,9 +27,11 @@ import { TasksService } from './tasks.service';
 @UseGuards(AuthGuard())
 export class TasksController {
   private taskService: TasksService;
+  private logger: Logger;
 
   constructor(taskService: TasksService) {
     this.taskService = taskService;
+    this.logger = new Logger('TasksController');
   }
 
   @Get()
@@ -36,6 +39,7 @@ export class TasksController {
     @Query(ValidationPipe) filterDto: GetTasksFilterDto,
     @GetUser() user: User
   ) {
+    this.logger.verbose(`${user.username} @Get:getTasks `);
     return this.taskService.getTasks(filterDto, user);
   }
 

@@ -1,0 +1,11 @@
+db:
+  type: 'postgres'
+  port: 5432
+  host: 'localhost'
+  username: 'postgres'
+  password: 'password'
+  database: 'nestjstm'
+  synchronize: true
+
+jwt:
+  secret: 'topSecretHash'
